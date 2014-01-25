@@ -44,7 +44,7 @@ auto main ( ) -> int
 		"というかそもそも僕の列挙した条件を見てブチ切れない人" ,
 	} )
 	{
-		std::cout << i << '.' << str << std::endl ;
+		std::cout << i << ". " << str << std::endl ;
 		++ i ;
 	}
 	std::cout
