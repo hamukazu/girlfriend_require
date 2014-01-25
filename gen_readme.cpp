@@ -28,7 +28,7 @@ auto main ( ) -> int
 		"Twitter、女優、モデル等の僕の趣味を認めてくれる人" ,
 	} )
 	{
-		std::cout << i << '.' << str << std::endl ;
+		std::cout << i << ". " << str << std::endl ;
 		++ i ;
 	}
 	std::cout
