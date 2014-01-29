@@ -69,76 +69,78 @@ const char * through ( const char * const cur , const char * const end )
 }
 void exec ( const char * cur , const char * const end , memory_uint8_t mem , size_t cur_mem )
 {
-	if ( cur == end || feof ( stdin ) )
+	for ( ; cur != end && ! feof ( stdin ) ; ++ cur )
 	{
-		return ;
-	}
-	switch ( * cur )
-	{
-		case '+' :
-		{
-			set_memory_uint8_t ( mem , cur_mem , get_memory_uint8_t ( mem , cur_mem ) + 1 ) ;
-		}
-		break ;
-		case '-' :
-		{
-			set_memory_uint8_t ( mem , cur_mem , get_memory_uint8_t ( mem , cur_mem ) - 1 ) ;
-		}
-		break ;
-		case '>' :
-		{
-			++ cur_mem ;
-		}
-		break ;
-		case '<' :
-		{
-			-- cur_mem ;
-		}
-		break ;
-		case ',' :
-		{
-			int tmp = getchar ( ) ;
-			if ( tmp == EOF )
-			{
-				return ;
-			}
-			set_memory_uint8_t ( mem , cur_mem , ( uint8_t ) ( unsigned char ) ( tmp ) ) ;
-		}
-		break ;
-		case '.' :
-		{
-			putchar ( get_memory_uint8_t ( mem , cur_mem ) ) ;
-		}
-		break ;
-		case '[' :
-		{
-			if ( get_memory_uint8_t ( mem , cur_mem ) )
-			{
-				exec ( cur + 1 , end , mem , cur_mem ) ;
-				-- cur ;
-			}
-			else
-			{
-				cur = through ( cur + 1 , end ) ;
-			}
-			if ( cur == end )
-			{
-				return ;
-			}
-		}
-		break ;
-		case ']' :
+		if ( cur == end || feof ( stdin ) )
 		{
 			return ;
 		}
-		break ;
-		default :
+		switch ( * cur )
 		{
-			fprintf ( stderr , "%s" , "Error.\n" ) ;
-			exit ( EXIT_FAILURE ) ;
+			case '+' :
+			{
+				set_memory_uint8_t ( mem , cur_mem , get_memory_uint8_t ( mem , cur_mem ) + 1 ) ;
+			}
+			break ;
+			case '-' :
+			{
+				set_memory_uint8_t ( mem , cur_mem , get_memory_uint8_t ( mem , cur_mem ) - 1 ) ;
+			}
+			break ;
+			case '>' :
+			{
+				++ cur_mem ;
+			}
+			break ;
+			case '<' :
+			{
+				-- cur_mem ;
+			}
+			break ;
+			case ',' :
+			{
+				int tmp = getchar ( ) ;
+				if ( tmp == EOF )
+				{
+					return ;
+				}
+				set_memory_uint8_t ( mem , cur_mem , ( uint8_t ) ( unsigned char ) ( tmp ) ) ;
+			}
+			break ;
+			case '.' :
+			{
+				putchar ( get_memory_uint8_t ( mem , cur_mem ) ) ;
+			}
+			break ;
+			case '[' :
+			{
+				if ( get_memory_uint8_t ( mem , cur_mem ) )
+				{
+					exec ( cur + 1 , end , mem , cur_mem ) ;
+					-- cur ;
+				}
+				else
+				{
+					cur = through ( cur + 1 , end ) ;
+				}
+				if ( cur == end )
+				{
+					return ;
+				}
+			}
+			break ;
+			case ']' :
+			{
+				return ;
+			}
+			break ;
+			default :
+			{
+				fprintf ( stderr , "%s" , "Error.\n" ) ;
+				exit ( EXIT_FAILURE ) ;
+			}
 		}
 	}
-	exec ( cur + 1 , end , mem , cur_mem ) ;
 }
 int main ( int argc , char * * argv )
 {

@@ -69,6 +69,10 @@ auto exec ( iterator cur , iterator end , std::vector < unsigned char > & mem , 
 			{
 				char tmp ;
 				std::cin.get ( tmp ) ;
+				if ( ! std::cin )
+				{
+					return ;
+				}
 				mem [ cur_mem ] = tmp ;
 			}
 			break ;
