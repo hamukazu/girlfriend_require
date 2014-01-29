@@ -40,73 +40,71 @@ auto through ( iterator cur , iterator end ) -> iterator
 template < typename iterator , typename = typename std::enable_if < std::is_same < typename std::iterator_traits < iterator >::value_type , char >::value >::type >
 auto exec ( iterator cur , iterator end , std::vector < unsigned char > & mem , std::vector < unsigned char >::size_type cur_mem ) -> void
 {
-	if ( cur == end || ! std::cin )
+	for ( ; cur != end && std::cin ; ++ cur )
 	{
-		return ;
-	}
-	mem.resize ( std::max ( mem.size ( ) , cur_mem + 1 ) , '\0' ) ;
-	switch ( * cur )
-	{
-		case '+' :
+		mem.resize ( std::max ( mem.size ( ) , cur_mem + 1 ) , '\0' ) ;
+		switch ( * cur )
 		{
-			++ mem [ cur_mem ] ;
-		}
-		break ;
-		case '-' :
-		{
-			-- mem [ cur_mem ] ;
-		}
-		break ;
-		case '>' :
-		{
-			++ cur_mem ;
-		}
-		break ;
-		case '<' :
-		{
-			-- cur_mem ;
-		}
-		break ;
-		case ',' :
-		{
-			char tmp ;
-			std::cin.get ( tmp ) ;
-			mem [ cur_mem ] = tmp ;
-		}
-		break ;
-		case '.' :
-		{
-			std::cout.put ( mem [ cur_mem ] ) ;
-		}
-		break ;
-		case '[' :
-		{
-			if ( mem [ cur_mem ] )
+			case '+' :
 			{
-				exec ( cur + 1 , end , mem , cur_mem ) ;
-				-- cur ;
+				++ mem [ cur_mem ] ;
 			}
-			else
+			break ;
+			case '-' :
 			{
-				cur = through ( cur + 1 , end ) ;
+				-- mem [ cur_mem ] ;
 			}
-			if ( cur == end )
+			break ;
+			case '>' :
+			{
+				++ cur_mem ;
+			}
+			break ;
+			case '<' :
+			{
+				-- cur_mem ;
+			}
+			break ;
+			case ',' :
+			{
+				char tmp ;
+				std::cin.get ( tmp ) ;
+				mem [ cur_mem ] = tmp ;
+			}
+			break ;
+			case '.' :
+			{
+				std::cout.put ( mem [ cur_mem ] ) ;
+			}
+			break ;
+			case '[' :
+			{
+				if ( mem [ cur_mem ] )
+				{
+					exec ( cur + 1 , end , mem , cur_mem ) ;
+					-- cur ;
+				}
+				else
+				{
+					cur = through ( cur + 1 , end ) ;
+				}
+				if ( cur == end )
+				{
+					return ;
+				}
+			}
+			break ;
+			case ']' :
 			{
 				return ;
 			}
-		}
-		break ;
-		case ']' :
-		{
-			return ;
-		}
-		break ;
-		default :
-		{
-			throw bf_error { } ;
+			break ;
+			default :
+			{
+				throw bf_error { } ;
+			}
 		}
 	}
-	exec ( cur + 1 , end , mem , cur_mem ) ;
 }
 auto main ( int argc , char * * argv ) -> int
 {
