@@ -120,6 +120,10 @@ auto main ( int argc , char * * argv ) -> int
 	std::string codeable { "+-<>[],." } ;
 	std::vector < char > code ;
 	std::ifstream file ( argv [ 1 ] , std::ios_base::binary | std::ios_base::in ) ;
+	if ( ! file )
+	{
+		throw std::runtime_error { std::string { "can't open file [" } + argv [ 1 ] + "]" } ;
+	}
 	std::copy_if (
 		std::istreambuf_iterator < char > ( file ) ,
 		std::istreambuf_iterator < char > ( ) ,
