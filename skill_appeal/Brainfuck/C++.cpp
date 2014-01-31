@@ -116,7 +116,7 @@ auto main ( int argc , char * * argv ) -> int
 	{
 		std::cout
 		<< "please command:" << std::endl 
-		<< "    $ " << argv [ 0 ] << " [FILENAME]" << std::endl ;
+		<< "    $ " << argv [ 0 ] << " FILENAME" << std::endl ;
 		return 0 ;
 	}
 	std::string codeable { "+-<>[],." } ;

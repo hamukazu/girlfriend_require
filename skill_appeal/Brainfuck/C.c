@@ -146,7 +146,7 @@ int main ( int argc , char * * argv )
 {
 	if ( argc != 2 )
 	{
-		printf ( "please command:\n    $ %s [FILENAME]\n" , argv [ 0 ] ) ;
+		printf ( "please command:\n    $ %s FILENAME\n" , argv [ 0 ] ) ;
 		return 0 ;
 	}
 	char codeable [ ] = "+-<>[],." ;
